@@ -1,6 +1,4 @@
-{ //la struttura json è molto simile a quella degli oggetti c# se fossimo in un contesto db dovremmo utilizzare le chiavi esterne
-  // nei vari oggetti anzichè avere delle liste degli altri oggetti , in questi ultimi avremo le chiavi esterne che puntano all'id oggetto
-  // Esempio : Studenti : Classrooms[] in json, in db Studenti id: Classrooms : StudentiId(chiave esterna che punta alla tabella studenti) 
+{  
   "Students": [
     {
       "StudentId": 1,

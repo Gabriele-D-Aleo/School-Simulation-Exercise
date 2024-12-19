@@ -10,7 +10,17 @@ namespace Test_Exercises.Controllers
     [Route("{controller}")]
     public class StudentsController : ControllerBase
     {
-        public string studFilePath = "../StorageTemp";
+        public string studFilePath = "..\\Test&Exercises\\StorageTemp\\Db.json";
+
+        // logger funziona senza nessuna aggiunta nel file Program perchè questo service
+        // è già aggiunto di default
+        public readonly ILogger<StudentsController> _logger;
+        
+
+        public StudentsController(ILogger<StudentsController> logger)
+        {
+            _logger = logger;
+        }
 
         #region Gets
 
@@ -19,20 +29,17 @@ namespace Test_Exercises.Controllers
         public ActionResult<Student> GetStudent(int id) 
         {
             Student st = new Student();
-            studFilePath = studFilePath+"/Students.json";
-            
-            
-            using (FileStream f = new FileStream(studFilePath, FileMode.Create))
-            {
-      
-                JsonDocument json= JsonDocument.Parse(f);
-                if (json.ToString().Length!=0)
-                st= json.Deserialize<Student>();
 
-            }
 
-            if (st.StudentId!= null)
-            return BadRequest(st);
+            string fileDb = System.IO.File.ReadAllText(studFilePath);
+
+            JsonNode jsonNode= JsonNode.Parse(fileDb);
+
+            // A lot of instructions put togheter it's a lo simpler than it looks, first of all in the JsonNode Doc we find the Students, after that we retrieve a List
+            st= jsonNode["Students"].Deserialize<List<Student>>().Find(x => x.StudentId == id);
+
+            if( st == null)
+                return BadRequest();
 
             return new OkObjectResult(st); 
         }
@@ -41,7 +48,23 @@ namespace Test_Exercises.Controllers
         [Route("GetStudents")]
         public ActionResult<List<Student>> GetStudents() 
         {
-            return new List<Student>(); 
+            List<Student> listSt = new List<Student>();
+
+
+            string fileDb = System.IO.File.ReadAllText(studFilePath);
+
+            JsonNode jsonNode = JsonNode.Parse(fileDb);
+
+            // A lot of instructions put togheter it's a lo simpler than it looks, first of all in the JsonNode Doc we find the Students, after that we retrieve a List
+            listSt = jsonNode["Students"].Deserialize<List<Student>>();
+
+            if (listSt == null)
+            {
+                _logger.LogWarning("couldn't find any students");
+                return BadRequest();
+            }
+            _logger.LogInformation("Students found");
+            return new OkObjectResult(listSt);
         }
 
         [HttpGet]
@@ -49,6 +72,35 @@ namespace Test_Exercises.Controllers
         public ActionResult<List<Student>> GetStudents(int classId) 
         {
             return new List<Student>(); 
+        }
+
+        [HttpGet]
+        [Route("GetStudentsAB")]
+        public ActionResult<List<Student>> GetStudentsAlphaBetOrder()
+        {
+            // Read the file
+            string fileDb = System.IO.File.ReadAllText(studFilePath);
+            // Parse the file to Json Node Json DOM easily accessible and modifiable
+            JsonNode dbNode = JsonNode.Parse(fileDb);
+
+            // we deserialize only the list of Students taken from the document Node
+            var tempstudList = dbNode["Students"].Deserialize<List<Student>>();
+            // to the deserialized list we add the new students
+            List<Student> AlphabOrderedStudents = new List<Student>();
+            Student lastStud = new Student();
+            /*for ( int i= 0; i<tempstudList.Count ;i++)
+            { 
+                foreach (Student sti in tempstudList)
+                    if(st != sti)
+                        lastStud = (int)st.StudentName[0] > (int)sti.StudentName[0] ? st : sti;
+                // 
+                AlphabOrderedStudents.Add(lastStud);
+                //tempstudList.r
+            }*/
+
+            // 1 gestire ordinamento studenti utilizzando puntatori su liste per ottimizzazione dei tempi
+
+            return new List<Student>();
         }
 
 
@@ -74,13 +126,26 @@ namespace Test_Exercises.Controllers
             List<Student> tempStud = new List<Student>();
             
             // Read the file
-            fileDb = System.IO.File.ReadAllText("..\\Test&Exercises\\StorageTemp\\Db.json");
+            fileDb = System.IO.File.ReadAllText(studFilePath);
             // Parse the file to Json Node Json DOM easily accessible and modifiable
             JsonNode dbNode = JsonNode.Parse(fileDb);
 
             // we deserialize only the list of Students taken from the document Node
             var tempstudNode = dbNode["Students"].Deserialize<List<Student>>();
             // to the deserialized list we add the new students
+            Student lastStudent = tempstudNode.Last<Student>();
+
+            foreach(Student studentn in students)
+            {
+                if (students.First<Student>() == studentn && lastStudent != null)
+                    studentn.StudentId = lastStudent.StudentId++;
+                else if (students.First<Student>() != studentn)
+                    studentn.StudentId = students[students.IndexOf(studentn) - 1].StudentId++;
+                else
+                    studentn.StudentId = 1;
+             
+            }
+
             tempstudNode.AddRange(students);
             // this is to write the new students indented so with \n
             var options = new JsonSerializerOptions { WriteIndented = true };
