@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FileLogger;
+using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using Test_Exercises.Models;
@@ -10,16 +11,17 @@ namespace Test_Exercises.Controllers
     [Route("{controller}")]
     public class StudentsController : ControllerBase
     {
-        public string studFilePath = "..\\Test&Exercises\\StorageTemp\\Db.json";
+        public string studFilePath = "C:\\Users\\gabriele.daleo\\source\\repos\\Test&Exercises\\Test&Exercises\\StorageTemp\\Db.json";
 
         // logger funziona senza nessuna aggiunta nel file Program perchè questo service
         // è già aggiunto di default
-        public readonly ILogger<StudentsController> _logger;
-        
 
-        public StudentsController(ILogger<StudentsController> logger)
+        public readonly IFileLoggerC _fileLogger;
+
+
+        public StudentsController(IFileLoggerC fileLogger)
         {
-            _logger = logger;
+            _fileLogger = fileLogger;
         }
 
         #region Gets
@@ -37,9 +39,16 @@ namespace Test_Exercises.Controllers
 
             // A lot of instructions put togheter it's a lo simpler than it looks, first of all in the JsonNode Doc we find the Students, after that we retrieve a List
             st= jsonNode["Students"].Deserialize<List<Student>>().Find(x => x.StudentId == id);
+            // logging into file our operations
 
-            if( st == null)
+
+            if (st == null)
+            {
+                _fileLogger.Log("Student not found");
                 return BadRequest();
+            }
+            else
+                _fileLogger.Log("succesful retrieval");
 
             return new OkObjectResult(st); 
         }
@@ -60,10 +69,9 @@ namespace Test_Exercises.Controllers
 
             if (listSt == null)
             {
-                _logger.LogWarning("couldn't find any students");
+                
                 return BadRequest();
             }
-            _logger.LogInformation("Students found");
             return new OkObjectResult(listSt);
         }
 

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FileLogger
 {
-    internal interface IFileLoggerC
+    public interface IFileLoggerC
     {
         /// <summary>
         /// Saves the Time of the last written
@@ -25,6 +25,8 @@ namespace FileLogger
         /// </summary>
         public string Path { get; set; }
 
+        public string DirectoryV { get; set; }
+
         /// <summary>
         /// This method creates a new file log, this occurrence should happen every 2 hours
         /// </summary>
@@ -33,7 +35,9 @@ namespace FileLogger
         public abstract void CreateNewLog();
         
 
-        public abstract void ModifyLog();
+        public abstract void ModifyLog(string content,string type);
+
+        public abstract void Log(string info, string type ="information");
 
         public abstract Task DeleteLog();
 
