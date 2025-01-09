@@ -16,6 +16,9 @@
 # Mono auto generated files
 mono_crash.*
 
+#specific db file
+C:\Users\gabriele.daleo\source\repos\Test&Exercises\Test&Exercises\StorageTemp\Db.json
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
@@ -361,3 +364,4 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Test&Exercises/StorageTemp/Db.json

@@ -33,7 +33,6 @@ namespace FileLogger
         /// <param name="path"> the path of the file, it is optional, 
         /// as if we don't put nothing the default one will be taken</param>
         public abstract void CreateNewLog();
-        
 
         public abstract void ModifyLog(string content,string type);
 

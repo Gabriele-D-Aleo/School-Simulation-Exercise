@@ -139,9 +139,9 @@ namespace Test_Exercises.Controllers
             JsonNode dbNode = JsonNode.Parse(fileDb);
 
             // we deserialize only the list of Students taken from the document Node
-            var tempstudNode = dbNode["Students"].Deserialize<List<Student>>();
+            var tempStudList = dbNode["Students"].Deserialize<List<Student>>();
             // to the deserialized list we add the new students
-            Student lastStudent = tempstudNode.Last<Student>();
+            Student lastStudent = tempStudList.Last<Student>();
 
             foreach(Student studentn in students)
             {
@@ -154,11 +154,13 @@ namespace Test_Exercises.Controllers
              
             }
 
-            tempstudNode.AddRange(students);
+            // potrebbe essere ridondante
+
+            tempStudList.AddRange(students);
             // this is to write the new students indented so with \n
             var options = new JsonSerializerOptions { WriteIndented = true };
             // we parse the new list of students and we change the old with the new one
-            dbNode["Students"] = JsonNode.Parse(JsonSerializer.Serialize(tempstudNode));
+            dbNode["Students"] = JsonNode.Parse(JsonSerializer.Serialize(tempStudList));
             // then with the Json Node DOM we parse it to string and overwrite the one that we have locally
             System.IO.File.WriteAllText("..\\Test&Exercises\\StorageTemp\\Db.json",dbNode.ToJsonString(options));
 
