@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Test&amp;Exercises\TestNExercises.csproj" />
+    <ProjectReference Include="..\Test&amp;Exercises\School-BE.csproj" />
   </ItemGroup>
 
 </Project>

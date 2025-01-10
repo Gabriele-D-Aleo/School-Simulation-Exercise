@@ -28,16 +28,6 @@ namespace Test_Exercises.Controllers
             Teacher t = new Teacher();
             var properties = t.GetType().GetProperties();
 
-            foreach ( PropertyInfo p in properties)
-            {
-                System.Console.WriteLine(p.Name);
-                var attributes = p.GetCustomAttributes();
-                foreach (Attribute a in attributes)
-                {
-                    System.Console.WriteLine(a.ToString());
-                }
-            }
-
             var fileDb = System.IO.File.ReadAllText(teacherFilePath);
             // Parse the file to Json Node Json DOM easily accessible and modifiable
             JsonNode dbNode = JsonNode.Parse(fileDb);

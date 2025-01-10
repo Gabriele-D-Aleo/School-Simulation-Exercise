@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestNExercises", "Test&Exercises\TestNExercises.csproj", "{393AA589-8CD4-4815-B4A4-09375BA8E13F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "School-BE", "School-BE\School-BE.csproj", "{393AA589-8CD4-4815-B4A4-09375BA8E13F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FETestNExercises", "FETestNExercises\FETestNExercises.csproj", "{967BA22C-D0EA-420E-BE82-D63106739331}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "School-FE", "School-FE\School-FE.csproj", "{967BA22C-D0EA-420E-BE82-D63106739331}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileLogger", "FileLogger\FileLogger.csproj", "{AC0F25FC-B392-416A-98A4-39010A4E5433}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTestNExercises", "UnitTestNExercises\UnitTestNExercises.csproj", "{4C6B06C1-EC5B-4C5B-84CF-B20B83BF46EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "School-Unit-Test", "School-Unit-Test\School-Unit-Test.csproj", "{4C6B06C1-EC5B-4C5B-84CF-B20B83BF46EC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ExternalLibraries", "ExternalLibraries", "{9800913D-1C23-4004-A183-3888D7368C36}"
 EndProject
