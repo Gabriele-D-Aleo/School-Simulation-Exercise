@@ -17,7 +17,7 @@
 mono_crash.*
 
 #specific db file
-C:\Users\gabriele.daleo\source\repos\Test&Exercises\Test&Exercises\StorageTemp\Db.json
+Test&Exercises/StorageTemp/
 
 # Build results
 [Dd]ebug/

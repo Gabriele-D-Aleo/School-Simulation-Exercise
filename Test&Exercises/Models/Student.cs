@@ -1,14 +1,20 @@
-﻿namespace Test_Exercises.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Test_Exercises.Models
 {
     public class Student
     {
         #region Properties
+        [Key,Required]
         public int StudentId { get; set; }
 
+        [Required]
         public string Name { get; set; }
 
+        [Required]
         public string Surname { get; set; }
 
+        [EmailAddress]
         public string Email { get; set; }
 
 

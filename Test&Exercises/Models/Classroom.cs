@@ -7,13 +7,13 @@ namespace Test_Exercises.Models
     {
         #region Properties
 
-        [Key]
+        [Key, Required]
         public int ClassId { get; set; }
-        
-        [Key]
+
+        [Key, Required]
         public int SubjectId { get; set; }
 
-        [Key]
+        [Key, Required]
         public int TeacherId { get; set; }
 
         public List<Student> Students { get; set; }

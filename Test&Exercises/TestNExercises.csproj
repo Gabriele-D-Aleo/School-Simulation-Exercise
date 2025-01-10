@@ -14,11 +14,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="StorageTemp\" />
+    <ProjectReference Include="..\FileLogger\FileLogger.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FileLogger\FileLogger.csproj" />
+    <Folder Include="StorageTemp\Logs\" />
   </ItemGroup>
 
 </Project>

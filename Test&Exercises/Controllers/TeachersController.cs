@@ -1,13 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using Test_Exercises.Models;
 
 namespace Test_Exercises.Controllers
 {
-
-    
-
     [ApiController]
     [Route("{controller}")]
     public class TeachersController : ControllerBase
@@ -25,6 +24,19 @@ namespace Test_Exercises.Controllers
         public ActionResult InsertTeachersF(IFormFile file)
         {
             JsonNode jsDoc;
+
+            Teacher t = new Teacher();
+            var properties = t.GetType().GetProperties();
+
+            foreach ( PropertyInfo p in properties)
+            {
+                System.Console.WriteLine(p.Name);
+                var attributes = p.GetCustomAttributes();
+                foreach (Attribute a in attributes)
+                {
+                    System.Console.WriteLine(a.ToString());
+                }
+            }
 
             var fileDb = System.IO.File.ReadAllText(teacherFilePath);
             // Parse the file to Json Node Json DOM easily accessible and modifiable

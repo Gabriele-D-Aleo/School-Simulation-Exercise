@@ -9,7 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FETestNExercises", "FETestN
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileLogger", "FileLogger\FileLogger.csproj", "{AC0F25FC-B392-416A-98A4-39010A4E5433}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestNExercises", "UnitTestNExercises\UnitTestNExercises.csproj", "{4C6B06C1-EC5B-4C5B-84CF-B20B83BF46EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTestNExercises", "UnitTestNExercises\UnitTestNExercises.csproj", "{4C6B06C1-EC5B-4C5B-84CF-B20B83BF46EC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ExternalLibraries", "ExternalLibraries", "{9800913D-1C23-4004-A183-3888D7368C36}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonValidator", "JsonValidator\JsonValidator.csproj", "{4F4F0735-B905-4DAE-BE77-93BAF1AFF89A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,9 +37,17 @@ Global
 		{4C6B06C1-EC5B-4C5B-84CF-B20B83BF46EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C6B06C1-EC5B-4C5B-84CF-B20B83BF46EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C6B06C1-EC5B-4C5B-84CF-B20B83BF46EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F4F0735-B905-4DAE-BE77-93BAF1AFF89A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F4F0735-B905-4DAE-BE77-93BAF1AFF89A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F4F0735-B905-4DAE-BE77-93BAF1AFF89A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F4F0735-B905-4DAE-BE77-93BAF1AFF89A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AC0F25FC-B392-416A-98A4-39010A4E5433} = {9800913D-1C23-4004-A183-3888D7368C36}
+		{4F4F0735-B905-4DAE-BE77-93BAF1AFF89A} = {9800913D-1C23-4004-A183-3888D7368C36}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {27084D24-3ED4-4032-8147-F57C8A5012E9}

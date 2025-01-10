@@ -18,21 +18,23 @@ namespace FileLogger
         /// This variable determines the path where files will be created
         /// </summary>
         public string Path { get; set; } 
-        public string DirectoryV { get; set; } = "C:\\Users\\gabriele.daleo\\source\\repos\\Test&Exercises\\Test&Exercises\\StorageTemp\\";
+        public string DirectoryV { get; set; } = "C:\\Users\\gabriele.daleo\\source\\repos\\Test&Exercises\\Test&Exercises\\StorageTemp\\Logs\\";
 
         public FileLoggerC(int span= 2)
         {
-            string path = "";
-            foreach( string directory in Directory.GetFiles("C:\\Users\\gabriele.daleo\\source\\repos\\Test&Exercises\\Test&Exercises\\StorageTemp\\"))
+            foreach( string file in Directory.GetFiles(DirectoryV, "*.log"))
             {
-                if (string.IsNullOrEmpty(path))
-                    path = directory;
-                else if (Directory.GetCreationTime(directory) > Directory.GetCreationTime(path)  )
-                    path = directory;
+                if (string.IsNullOrEmpty(Path))
+                    Path = file;
+                else if (File.GetCreationTime(file) > File.GetCreationTime(Path)  )
+                    Path = file;
             }
-            Path = path;
-            LastLog = TimeOnly.FromDateTime(Directory.GetCreationTime(path));
+
             SpanForFileCreation = span;
+
+            if (!string.IsNullOrEmpty(Path))
+                LastLog = TimeOnly.FromDateTime(Directory.GetCreationTime(Path));
+            
         }
 
         /// <summary>
@@ -40,11 +42,11 @@ namespace FileLogger
         /// </summary>
         public void CreateNewLog()
         {
-           Path = DirectoryV+ "Log "+ DateTime.Now.ToShortDateString().Replace("/","-") + "-" + DateTime.Now.ToShortTimeString() ;
+           Path = DirectoryV+ "Log_"+ DateTime.Now.ToShortDateString().Replace("/","-").Replace(" ","-") + "_" + DateTime.Now.ToShortTimeString().Replace(" ", "-").Replace(":","-") + ".log" ;
            using (File.Create(Path))
             { 
             }
-
+            LastLog = TimeOnly.FromDateTime(Directory.GetCreationTime(Path));
         }
 
 

@@ -69,9 +69,11 @@ namespace Test_Exercises.Controllers
 
             if (listSt == null)
             {
-                
+                _fileLogger.Log("Student not found");
                 return BadRequest();
             }
+            _fileLogger.Log("succesful retrieval");
+
             return new OkObjectResult(listSt);
         }
 
